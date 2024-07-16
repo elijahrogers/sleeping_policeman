@@ -1,0 +1,19 @@
+{
+  "manifest_version": 2,
+  "name": "Sleeping Policeman",
+  "version": "1.0",
+  "description": "Slow down!",
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.x.com/*",
+    "*://*.twimg.com/*"
+  ],
+  "background": {
+    "scripts": ["slowdown.js"]
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  }
+}
