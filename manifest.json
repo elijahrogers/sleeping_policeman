@@ -14,6 +14,6 @@
   },
   "browser_action": {
     "default_popup": "popup.html",
-    "default_icon": "icon.png"
+    "default_icon": "policeman-small.png"
   }
 }

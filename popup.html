@@ -1,5 +1,29 @@
-<div>
-  <h1>Welcome!</h1>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Slow Down!</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Calistoga&family=Gothic+A1:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/popup.css">
+  <script src="popup.js"></script>
+</head>
+<body>
+  <header>
+    <img class="icon" src="policeman-small.png" alt="Sleeping Policeman">
+    <h3>Sleeping Policeman</h3>
+  </header>
 
-  <p>This should be visible</p>
-</div>
+  <div class="speedLimitContainer">
+    <div id="speedLimitSign">
+      <div class="inner">
+        <span>SPEED</span>
+        <span>LIMIT</span>
+        <span class="limit" id="speedLimit">0</span>
+      </div>
+    </div>
+  </div>
+
+  <p>Slow Down! I clocked you making <span id="requestNum"></span> requests today</p>
+</body>
+</html>
