@@ -47,8 +47,6 @@ function delayRequest(requestDetails) {
     }
 }
 
-console.log('Slowdown running...')
-
 // Listen for beforeRequest and potentially delay it
 browser.webRequest.onBeforeRequest.addListener(
     delayRequest,
