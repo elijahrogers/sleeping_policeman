@@ -1,55 +1,104 @@
-function resetDailyCount() {
-  const currentDate = new Date().toDateString(); // Get current date as a string, ignoring time
-  const lastResetDate = localStorage.getItem('lastResetDate');
-
-  if (currentDate !== lastResetDate) {
-      // Dates are different, so reset the count and update the last reset date
-      localStorage.setItem('requestCount', 0);
-      localStorage.setItem('lastResetDate', currentDate);
-      console.log('Request count has been reset for the day.');
+const urlMapping = {
+  twitter: {
+    domains: ["x.com", "pbs.twimg.com", "video.twimg.com"],
+    urls: ["*://*.x.com/*", "*://*.twimg.com/*"]
+  },
+  reddit: {
+    domains: ["www.reddit.com", "alb.reddit.com", "external-preview.redd.it", "www.redditstatic.com", "preview.redd.it", "v.redd.it", "b.thumbs.redditmedia.com"],
+    urls: ["https://*.reddit.com/*", "*://*redditstatic.com/*", "*://*preview.redd.it/*", "*://*redd.it/*", "*://*b.thumbs.redditmedia.com/*"]
   }
 }
 
-function incrementRequestCount() {
+class Settings {
+  castBoolean(val) {
+    return val?.toLowerCase() === 'true'
+  }
+
+  get slowTwitter() {
+    return this.castBoolean(localStorage.getItem('slowTwitter'))
+  }
+
+  set slowTwitter(val) {
+    localStorage.setItem('slowTwitter', val)
+  }
+
+  get slowReddit() {
+    return this.castBoolean(localStorage.getItem('slowReddit'))
+  }
+
+  set slowReddit(val) {
+    localStorage.setItem('slowReddit', val)
+  }
+}
+
+function resetDailyCount() {
+  const currentDate = new Date().toDateString() // Get current date as a string, ignoring time
+  const lastResetDate = localStorage.getItem('lastResetDate')
+
+  if (currentDate !== lastResetDate) {
+      // Dates are different, so reset the count and update the last reset date
+      Object.keys(urlMapping).forEach(site => { localStorage.setItem(`${site}RequestCount`, 0) })
+      localStorage.setItem('lastResetDate', currentDate)
+      console.log('Request count has been reset for the day.')
+  }
+}
+
+function incrementRequestCount(site) {
   resetDailyCount(); // Ensure count is reset if needed before incrementing
-  let currentCount = currentRequestCount()
+
+  let currentCount = currentRequestCount(site)
   currentCount++;
-  localStorage.setItem('requestCount', currentCount);
-  console.log(`Current request count is ${currentCount}`);
+
+  localStorage.setItem(`${site}RequestCount`, currentCount);
+  console.log(`Current request count for ${site} is ${currentCount}`);
 }
 
-function currentRequestCount() {
-  return parseInt(localStorage.getItem('requestCount'), 10) || 0;
+function currentRequestCount(site) {
+  return parseInt(localStorage.getItem(`${site}RequestCount`), 10) || 0;
 }
 
+const settings = new Settings()
 
-// Function to delay requests
 function delayRequest(requestDetails) {
     if (requestDetails.method !== "GET") {
       return; // If not a GET request, do nothing
     }
 
-    let url = new URL(requestDetails.url);
+    let url = new URL(requestDetails.url)
     let domain = url.hostname;
+    let site = null
 
-    // Check if the domain is one we want to throttle
-    if (domain === "x.com" || domain === "pbs.twimg.com" || domain === "video.twimg.com") {
+    Object.entries(urlMapping).forEach(([key, value]) => {
+      if(value.domains.includes(domain)) {
+        site = key
+      }
+    })
 
-        // Calculate delay based on the count of requests
-        let delay = Math.sqrt(Math.floor(currentRequestCount() / 50)) * 250; // Delay increases sublinearly
+    if(!site) { return }
 
-        incrementRequestCount()
+    const delay = Math.sqrt(Math.floor(currentRequestCount(site) / 50)) * 250; // Delay increases sublinearly
+    incrementRequestCount(site)
+    console.log(`Delaying request #${currentRequestCount(site)} to ${url} for ${delay} milliseconds.`)
 
-        console.log(`Delaying request #${currentRequestCount()} to ${url} for ${delay} milliseconds.`);
-
-        // Use setTimeout to delay the resolving of the request
-        return new Promise((resolve) => setTimeout(() => resolve({}), delay));
-    }
+    return new Promise((resolve) => setTimeout(() => resolve({}), delay))
 }
 
+let urls = []
+
+if(settings.slowReddit) {
+  urls.push(...urlMapping.reddit.urls)
+  console.log('Delaying reddit')
+}
+
+if(settings.slowTwitter) {
+  urls.push(...urlMapping.twitter.urls)
+  console.log('Delaying Twitter')
+}
+
+console.log({ urls: urls })
 // Listen for beforeRequest and potentially delay it
 browser.webRequest.onBeforeRequest.addListener(
     delayRequest,
-    { urls: ["*://*.x.com/*", "*://*.twimg.com/*"] },
+    { urls: urls },
     ["blocking"]
 );

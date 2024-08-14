@@ -4,10 +4,10 @@
   "version": "1.0",
   "description": "Slow down!",
   "permissions": [
-    "webRequest",
-    "webRequestBlocking",
+    "https://*.reddit.com/*",
     "*://*.x.com/*",
-    "*://*.twimg.com/*"
+    "webRequest",
+    "webRequestBlocking"
   ],
   "background": {
     "scripts": ["slowdown.js"]

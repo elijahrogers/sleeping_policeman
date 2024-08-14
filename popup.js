@@ -1,6 +1,6 @@
 class Settings {
   castBoolean(val) {
-    return val.toLowerCase() === 'true'
+    return val?.toLowerCase() === 'true'
   }
 
   get slowTwitter() {
