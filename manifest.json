@@ -7,7 +7,9 @@
     "https://*.reddit.com/*",
     "*://*.x.com/*",
     "webRequest",
-    "webRequestBlocking"
+    "webRequestBlocking",
+    "tabs",
+    "activeTab"
   ],
   "background": {
     "scripts": ["slowdown.js"]

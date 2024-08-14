@@ -20,17 +20,49 @@ class Settings {
   }
 }
 
-function currentRequestCount() {
-  return parseInt(localStorage.getItem('requestCount'), 10) || 0;
+function currentRequestCount(site) {
+  return parseInt(localStorage.getItem(`${site}RequestCount`), 10) || 0;
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+async function getActiveTabHostName() {
+  let tabs = await browser.tabs.query({ active: true, currentWindow: true });
+  let activeTab = tabs[0];
+  let url = new URL(activeTab.url);
+  let hostName = url.hostname;
+  return hostName;
+}
+
+async function updatePopup() {
   const contentDiv = document.getElementById('speedLimit')
-  let delay = Math.sqrt(Math.floor(currentRequestCount() / 50)) * 250
+  let site = null
+
+  let hostName = await getActiveTabHostName();
+  console.log(hostName)
+
+  switch(hostName) {
+    case "x.com":
+      site = 'twitter'
+      break;
+    case "www.reddit.com":
+      site = 'reddit'
+      break;
+    default:
+      site = 'twitter'
+      break;
+  }
+
+  let delay = Math.sqrt(Math.floor(currentRequestCount(site) / 50)) * 250
   contentDiv.textContent = `${Math.round(delay / 100) / 10 }S`
 
   const requests = document.getElementById('requestNum')
-  requests.textContent = currentRequestCount().toLocaleString()
+  requests.textContent = currentRequestCount(site).toLocaleString()
+
+  const siteName = document.getElementById('siteName')
+  siteName.textContent = site
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  updatePopup()
 
   const settings = new Settings()
   const inputs = document.querySelectorAll('#options input')
