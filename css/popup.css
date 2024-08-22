@@ -2,29 +2,59 @@ body {
   font-family: "Calistoga", serif;
   font-weight: 400;
   font-style: normal;
-  background-color: #111D48;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  color: white;
+  background-color: #F5EFD7;
+  border-radius: 2rem;
+  color: #111D48;
   font-size: 0.75rem;
+  border: 1px solid #89591A;
+
+  .container {
+    padding: 2rem;
+    margin: 0.5rem;
+    border-radius: 1rem;
+    border: 1px solid #89591A;
+  }
 
   header {
     color: #CBA00C;
     font-size: 1rem;
     display: flex;
-    gap: 1rem;
     align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0 1rem;
+    h2 {
+      font-size: 2.5rem;
+    }
 
     a {
       text-decoration: none;
       &:visited {
-        color: #CBA00C;
+        color: #111D48
       }
     }
   }
 
+  .main {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .spacer {
+    border-top: 1px solid #89591A;
+    height: 0.25rem;
+    border-bottom: 1px solid #CBA00C;
+  }
+
   .icon {
-    height: 3rem;
+    height: 5rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
   }
 
   .speedLimitContainer {
@@ -37,6 +67,8 @@ body {
     font-family: "Gothic A1", serif;
     background-color: white;
     color: black;
+
+    filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
 
     font-size: 2rem;
     padding: 0.25rem;
@@ -59,4 +91,72 @@ body {
       font-weight: 800;
     }
   }
+}
+
+#options {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-around;
+  margin-top: 1rem;
+}
+
+/* Ensure the checkbox input is completely hidden */
+.custom-checkbox input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+  margin: 0;
+}
+
+.custom-checkbox {
+  font-family: Arial, Helvetica, sans-serif;
+
+  .checkbox {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .label {
+    font-size: 1rem;
+  }
+
+  .desc {
+    font-size: 0.75rem;
+    color: #757575;
+    margin-top: 0.25rem;
+  }
+}
+
+/* Create a custom checkmark box */
+.custom-checkbox .checkmark {
+  width: 20px; /* Adjust the size as needed */
+  height: 20px;
+  background-color: #333; /* Black background */
+  border-radius: 4px; /* Slightly rounded corners */
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+}
+
+/* Create the checkmark itself */
+.custom-checkbox .checkmark::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 5px;
+  height: 10px;
+  border: solid white; /* White checkmark */
+  border-width: 0 2px 2px 0;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+/* When the checkbox is checked, show the checkmark */
+.custom-checkbox input[type="checkbox"]:checked + .checkmark::after {
+  opacity: 1;
 }

@@ -10,30 +10,53 @@
   <script src="popup.js"></script>
 </head>
 <body>
-  <header>
-    <img class="icon" src="policeman-small.png" alt="Sleeping Policeman">
-    <a href="https://en.wikipedia.org/wiki/Speed_bump#Speed_bumps">
-      <h3>Sleeping Policeman</h3>
-    </a>
-  </header>
+  <section class="container">
+    <header>
+      <a href="https://en.wikipedia.org/wiki/Speed_bump#Speed_bumps">
+        <h2>Sleeping <br> Policeman</h2>
+      </a>
+      <img class="icon" src="policeman-small.png" alt="Sleeping Policeman">
+    </header>
 
-  <div class="speedLimitContainer">
-    <div id="speedLimitSign">
-      <div class="inner">
-        <span>SPEED</span>
-        <span>LIMIT</span>
-        <span class="limit" id="speedLimit">0</span>
+    <div class="main">
+      <div class="speedLimitContainer">
+        <div id="speedLimitSign">
+          <div class="inner">
+            <span>SPEED</span>
+            <span>LIMIT</span>
+            <span class="limit" id="speedLimit">0</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3>Slow Down!</h3>
+        <p>I clocked you making <span id="requestNum"></span> requests on <span id="siteName"></span> today</p>
       </div>
     </div>
-  </div>
 
-  <p>Slow Down! I clocked you making <span id="requestNum"></span> requests on <span id="siteName"></span> today</p>
+    <div class="spacer"></div>
+    <div id="options">
+      <label class="custom-checkbox">
+        <span class="checkbox">
+          <input type="checkbox" id="Twitter" />
+          <span class="checkmark"></span>
+          <span class="label">Twitter</span>
+        </span>
 
-  <div id="options">
-    <input type="checkbox" id="Twitter"/>
-    <label for="twitter">Twitter/X</label>
-    <input type="checkbox" id="Reddit"/>
-    <label for="reddit">Reddit</label>
-  </div>
+        <div class="desc">Slow down Twitter</div>
+      </label>
+
+      <label class="custom-checkbox">
+        <span class="checkbox">
+          <input type="checkbox" id="Reddit" />
+          <span class="checkmark"></span>
+          <span class="label">Reddit</span>
+        </span>
+
+        <div class="desc">Slow down Reddit</div>
+      </label>
+    </div>
+  </section>
 </body>
 </html>
