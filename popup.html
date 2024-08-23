@@ -6,6 +6,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Calistoga&family=Gothic+A1:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Italianno&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="css/popup.css">
   <script src="popup.js"></script>
 </head>
@@ -15,7 +16,9 @@
       <a href="https://en.wikipedia.org/wiki/Speed_bump#Speed_bumps">
         <h2>Sleeping <br> Policeman</h2>
       </a>
-      <img class="icon" src="policeman-small.png" alt="Sleeping Policeman">
+      <span>
+        <img class="icon" src="policeman-small.png" alt="Sleeping Policeman">
+      </span>
     </header>
 
     <div class="main">
@@ -29,9 +32,13 @@
         </div>
       </div>
 
-      <div>
+      <div class="warning">
         <h3>Slow Down!</h3>
-        <p>I clocked you making <span id="requestNum"></span> requests on <span id="siteName"></span> today</p>
+        <p>
+          I clocked you making <span id="requestNum"></span> requests on <span id="siteName"></span> today.
+        </p>
+
+        <div id="protect-and-serve">"to protect and serve"</div>
       </div>
     </div>
 
