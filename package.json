@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "web-ext": "^8.2.0"
+  },
+  "scripts": {
+    "zip": "web-ext build --overwrite-dest"
+  }
+}
