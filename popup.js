@@ -37,7 +37,6 @@ async function updatePopup() {
   let site = null
 
   let hostName = await getActiveTabHostName();
-  console.log(hostName)
 
   switch(hostName) {
     case "x.com":
@@ -73,7 +72,6 @@ document.addEventListener('DOMContentLoaded', function () {
     input.addEventListener('change', event => {
       const input = event.currentTarget
       settings[`slow${input.id}`] = input.checked
-      console.log(settings.slowTwitter)
     })
   })
 });

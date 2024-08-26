@@ -39,7 +39,6 @@ function resetDailyCount() {
       // Dates are different, so reset the count and update the last reset date
       Object.keys(urlMapping).forEach(site => { localStorage.setItem(`${site}RequestCount`, 0) })
       localStorage.setItem('lastResetDate', currentDate)
-      console.log('Request count has been reset for the day.')
   }
 }
 
@@ -50,7 +49,6 @@ function incrementRequestCount(site) {
   currentCount++;
 
   localStorage.setItem(`${site}RequestCount`, currentCount);
-  console.log(`Current request count for ${site} is ${currentCount}`);
 }
 
 function currentRequestCount(site) {
@@ -78,7 +76,6 @@ function delayRequest(requestDetails) {
 
     const delay = Math.sqrt(Math.floor(currentRequestCount(site) / 50)) * 250; // Delay increases sublinearly
     incrementRequestCount(site)
-    console.log(`Delaying request #${currentRequestCount(site)} to ${url} for ${delay} milliseconds.`)
 
     return new Promise((resolve) => setTimeout(() => resolve({}), delay))
 }
@@ -87,15 +84,12 @@ let urls = []
 
 if(settings.slowReddit) {
   urls.push(...urlMapping.reddit.urls)
-  console.log('Delaying reddit')
 }
 
 if(settings.slowTwitter) {
   urls.push(...urlMapping.twitter.urls)
-  console.log('Delaying Twitter')
 }
 
-console.log({ urls: urls })
 // Listen for beforeRequest and potentially delay it
 browser.webRequest.onBeforeRequest.addListener(
     delayRequest,
