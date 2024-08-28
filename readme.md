@@ -1,7 +1,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/elijahrogers/sleeping_policeman">
-    <img src="https://raw.githubusercontent.com/elijahrogers/sleeping_policeman/master/policeman-transparent.png" alt="Logo" width="80" height="80">
+    <img src="images/policeman-transparent.png" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">Sleeping Policeman</h3>
@@ -20,7 +20,7 @@
 
 ## Getting Started
 
-<img align="left" src="popup.png" alt="popup" width="300" height="300">
+<img align="left" src="images/popup.png" alt="popup" width="300" height="300">
 
 The easiest way to use Sleeping Policeman is to download the extension directly from Mozilla via <a href="https://addons.mozilla.org/en-US/firefox/addon/sleeping-policeman/">addons.mozilla.org</a> (AMO). It can also be run as a temporary add-on locally using the instructions below.
 
