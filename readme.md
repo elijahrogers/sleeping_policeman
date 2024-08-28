@@ -56,3 +56,7 @@ The delay increases sublinearly:
 |1000|~1.1s|
 
 The request count is reset each day and unchecking the checkbox will disable the delay.
+
+## License
+
+Distributed under the GNU GPL-3.0 License. See `LICENSE.txt` for more information.
