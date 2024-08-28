@@ -1,4 +1,15 @@
 export default class Settings {
+  constructor() {
+    // If not set, default to true
+    if(!localStorage.getItem('slowReddit')) {
+      this.slowReddit = 'true'
+    }
+
+    if(!localStorage.getItem('slowTwitter')) {
+      this.slowTwitter = 'true'
+    }
+  }
+
   resetDailyCount() {
     const currentDate = new Date().toDateString() // Ignore time
 
