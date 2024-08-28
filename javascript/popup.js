@@ -1,6 +1,8 @@
+import Settings from "./settings.js"
+
 export default class Popup {
-  currentRequestCount(site) {
-    return parseInt(localStorage.getItem(`${site}RequestCount`), 10) || 0;
+  constructor() {
+    this.settings = new Settings()
   }
 
   async getActiveTabHostName() {
@@ -29,11 +31,11 @@ export default class Popup {
         break;
     }
 
-    let delay = Math.sqrt(Math.floor(this.currentRequestCount(site) / 50)) * 250
+    const delay = this.settings.delayFor(site)
     contentDiv.textContent = `${Math.round(delay / 100) / 10 }S`
 
     const requests = document.getElementById('requestNum')
-    requests.textContent = this.currentRequestCount(site).toLocaleString()
+    requests.textContent = this.settings.currentRequestCount(site).toLocaleString()
 
     const siteName = document.getElementById('siteName')
     siteName.textContent = site

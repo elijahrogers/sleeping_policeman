@@ -14,30 +14,6 @@ export default class Patrolman {
     }
   }
 
-  currentRequestCount(site) {
-    return parseInt(localStorage.getItem(`${site}RequestCount`), 10) || 0;
-  }
-
-  resetDailyCount() {
-    const currentDate = new Date().toDateString() // Get current date as a string, ignoring time
-    const lastResetDate = localStorage.getItem('lastResetDate')
-
-    if (currentDate !== lastResetDate) {
-        // Dates are different, so reset the count and update the last reset date
-        Object.keys(this.urlMapping).forEach(site => { localStorage.setItem(`${site}RequestCount`, 0) })
-        localStorage.setItem('lastResetDate', currentDate)
-    }
-  }
-
-  incrementRequestCount(site) {
-    resetDailyCount(); // Ensure count is reset if needed
-
-    let currentCount = currentRequestCount(site)
-    currentCount++;
-
-    localStorage.setItem(`${site}RequestCount`, currentCount);
-  }
-
   delayRequest(requestDetails) {
     if (requestDetails.method !== "GET") {
       return; // If not a GET request, do nothing
@@ -55,8 +31,8 @@ export default class Patrolman {
 
     if(!site) { return }
 
-    const delay = Math.sqrt(Math.floor(currentRequestCount(site) / 50)) * 250; // Delay increases sublinearly
-    incrementRequestCount(site)
+    const delay = this.settings.delayFor(site)
+    this.settings.incrementRequestCount(site)
 
     return new Promise((resolve) => setTimeout(() => resolve({}), delay))
   }

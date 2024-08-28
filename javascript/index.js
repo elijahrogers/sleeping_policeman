@@ -23,7 +23,7 @@ const patrolman = new Patrolman()
 
 // Listen for beforeRequest and potentially delay it
 browser.webRequest.onBeforeRequest.addListener(
-  patrolman.delayRequest,
+  patrolman.delayRequest.bind(patrolman),
   { urls: patrolman.urls },
   ["blocking"]
 );
