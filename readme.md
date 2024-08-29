@@ -29,13 +29,14 @@ The easiest way to use Sleeping Policeman is to download the extension directly 
 
 ## Installation
 
-This will allow you to load this extension as a temporary add-on for local debugging
+This will allow you to load the extension as a temporary add-on for local debugging. It requires `yarn` to build JS using [parcel](https://parceljs.org/).
 
-1. Clone this repo `git clone https://github.com/elijahrogers/sleeping_policeman.git`
-2. Navigate to `about:debugging`in Firefox
-3. Click "This Firefox"
-4. Click "Load Temporary Add-on"
-5. Open the extension's directory and select the `manifest.json` file
+1. Clone this repo: `git clone https://github.com/elijahrogers/sleeping_policeman.git`
+2. Install packages and build: `yarn install && yarn watch`
+4. Navigate to `about:debugging`in Firefox
+5. Click "This Firefox"
+6. Click "Load Temporary Add-on"
+7. Open the extension's directory and select the `manifest.json` file
 
 ## Usage
 
