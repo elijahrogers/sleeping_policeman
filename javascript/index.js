@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
     input.addEventListener('change', event => {
       const input = event.currentTarget
       settings[`slow${input.id}`] = input.checked
+      popup.update()
     })
   })
 });

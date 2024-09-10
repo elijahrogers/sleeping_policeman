@@ -17,6 +17,8 @@ export default class Popup {
     const contentDiv = document.getElementById('speedLimit')
     let site = null
 
+    if(!contentDiv) { return }
+
     let hostName = await this.getActiveTabHostName();
 
     switch(hostName) {

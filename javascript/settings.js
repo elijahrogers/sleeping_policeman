@@ -23,7 +23,11 @@ export default class Settings {
   }
 
   delayFor(site) {
-    return this.delay(this.currentRequestCount(site))
+    if (this[`slow${this.capitalize(site)}`]) {
+      return this.delay(this.currentRequestCount(site))
+    } else {
+      return 0
+    }
   }
 
   delay(requestCount) {
@@ -46,6 +50,10 @@ export default class Settings {
 
   castBoolean(val) {
     return val?.toLowerCase() === 'true'
+  }
+
+  capitalize(word) {
+    return word.charAt(0).toUpperCase() + word.slice(1)
   }
 
   get lastResetDate() {
