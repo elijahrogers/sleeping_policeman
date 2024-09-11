@@ -3,6 +3,7 @@
   "main": "main.js",
   "scripts": {
     "zip": "web-ext build --overwrite-dest",
+    "zip-source": "zip -r sleeping_policeman.zip ./ -x \"/node_modules/*\" -x \"web-ext-artifacts/*\" -x \".parcel-cache/*\" -x \".git/*\"",
     "watch": "parcel watch",
     "build": "parcel build"
   },
